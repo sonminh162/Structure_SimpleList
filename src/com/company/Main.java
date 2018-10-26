@@ -1,0 +1,44 @@
+package com.company;
+
+import java.util.Arrays;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    MyList<Integer> listInteger = new MyList<Integer>();
+	    listInteger.add(1);
+	    listInteger.add(2);
+	    listInteger.add(3);
+	    listInteger.add(3);
+	    listInteger.add(4);
+
+        System.out.println("Element 4:"+listInteger.get(4));
+        System.out.println("Element 1:"+listInteger.get(1));
+        System.out.println("Element 2:"+listInteger.get(2));
+
+
+    }
+}
+class MyList<E>{
+    private int size = 0;
+    private static final int DEFAULT_CAPATICY = 10;
+    private Object elements[];
+    public MyList(){
+        elements = new Object[DEFAULT_CAPATICY];
+    }
+    private void ensureCapa(){
+        int newSize = elements.length*2;
+        elements = Arrays.copyOf(elements,newSize);
+    }
+    public void add(E e){
+        if(size == elements.length){
+            ensureCapa();
+        }
+        elements[size++] = e;
+    }
+    public E get(int i){
+        if(i >= size || i<0)
+            throw new IndexOutOfBoundsException("Index:"+i+",Size:"+size);
+        return (E)elements[i];
+    }
+}
